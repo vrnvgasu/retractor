@@ -22,6 +22,7 @@ class RetractJob implements ShouldQueue
      */
     private $retractService;
     private $data;
+    public $tries = 1;
 
     /**
      * RetractJob constructor.
