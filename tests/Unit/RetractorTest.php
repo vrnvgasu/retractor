@@ -22,9 +22,7 @@ class RetractorTest extends TestCase
 
         $class->retract(1);
 
-        Queue::assertNotPushed(RetractJob::class, function ($job) {
-            return ! is_null($job->delay);
-        });
+        Queue::assertNotPushed(RetractJob::class, fn($job) => ! is_null($job->delay));
     }
 
     public function testRetractFailed(): void
@@ -35,14 +33,9 @@ class RetractorTest extends TestCase
 
         $class->retract(false);
 
-        Queue::assertPushed(RetractJob::class, function ($job) {
-            return ! is_null($job->delay);
-        });
+        Queue::assertPushed(RetractJob::class, fn($job) => ! is_null($job->delay));
     }
 
-    /**
-     * @return Retractable
-     */
     private function getClass(): Retractable
     {
         return new class implements Retractable {

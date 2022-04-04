@@ -11,7 +11,6 @@ interface Retractable
 
     /**
      * @param null $data
-     * @return bool
      */
     public function tryToProvide($data = null): bool;
 }

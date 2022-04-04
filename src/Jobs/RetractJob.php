@@ -16,23 +16,15 @@ use Vrnvgasu\Retractor\Interfaces\Retractable;
 class RetractJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
-    /**
-     * @var Retractable
-     */
-    private $retractService;
-    private $data;
     public $tries = 1;
 
     /**
      * RetractJob constructor.
      * @param Retractable $retractService
-     * @param $data
+     * @param null $data
      */
-    public function __construct(Retractable $retractService, $data = null)
+    public function __construct(private Retractable $retractService, private $data = null)
     {
-        $this->retractService = $retractService;
-        $this->data = $data;
     }
 
     /**
